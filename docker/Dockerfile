@@ -21,8 +21,6 @@ RUN apt-get update && apt-get install -y apt-utils
 
 # Instalación de librerías requeridas de Python para el proyecto
 RUN pip3 install \
-    tensorflow==2.4.0 \
-    keras==2.4.3 \
     matplotlib \
     pandas \
     seaborn \
