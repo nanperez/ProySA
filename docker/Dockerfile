@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y apt-utils
 RUN pip3 install \
     pandas \
     seaborn \
+    matplotlib \
     numpy \
     scikit-learn \
     scipy \
@@ -49,7 +50,6 @@ RUN pip3 install \
     language_data==1.2.0 \
     marisa-trie==1.1.1 \
     MarkupSafe==2.1.5 \
-    matplotlib==3.8.4 \
     murmurhash==1.0.10 \
     packaging==24.0 \
     pillow==10.3.0 \
