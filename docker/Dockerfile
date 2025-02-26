@@ -25,7 +25,6 @@ RUN pip3 install \
     seaborn \
     matplotlib \
     numpy \
-    scikit-learn \
     scipy \
     nltk \
     gensim \
