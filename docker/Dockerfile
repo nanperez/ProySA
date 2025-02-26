@@ -1,6 +1,6 @@
-# La imagen usa Ubuntu 18.04
+# Usa una imagen base de Ubuntu 20.04
 FROM ubuntu:20.04
-LABEL maintainer=@naperez
+LABEL maintainer="@naperez"
 
 # Evita que el frontend de APT requiera interacción
 ENV DEBIAN_FRONTEND=noninteractive
@@ -80,7 +80,11 @@ RUN pip3 install \
     wasabi==1.1.2 \
     weasel==0.3.4
 
-# Descarga el modelo de Spacy
-RUN pip install en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl#sha256=86cc141f63942d4b2c5fcee06630fd6f904788d2f0ab005cce45aadb8fb73889
+# Instalar el modelo en-core-web-sm de SpaCy
+RUN pip install en-core-web-sm==3.7.1
 
+# Descargar el modelo de SpaCy
+RUN python -m spacy download en_core_web_sm
+
+# Establecer el comando de entrada
 ENTRYPOINT ["/bin/bash"]
