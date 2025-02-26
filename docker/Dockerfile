@@ -1,5 +1,5 @@
 # La imagen usa Ubuntu 18.04
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 LABEL maintainer=@naperez
 
 # Evita que el frontend de APT requiera interacción
@@ -30,7 +30,7 @@ RUN pip3 install \
     scipy \
     nltk \
     gensim \
-    spacy==3.7.4 \
+    spacy==3.6.1 \
     annotated-types==0.6.0 \
     blis==0.7.11 \
     catalogue==2.0.10 \
