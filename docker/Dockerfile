@@ -29,9 +29,9 @@ RUN pip3 install \
     scipy \
     nltk \
     gensim \
-    spacy==3.6.1 \  
-    thinc==8.1.8 \  
-    pydantic \  
+    spacy==3.6.1 \
+    thinc==8.1.8 \
+    "pydantic<2.0" \
     annotated-types==0.6.0 \
     blis==0.7.11 \
     catalogue==2.0.10 \
@@ -75,10 +75,7 @@ RUN pip3 install \
     wasabi==1.1.2 \
     weasel==0.3.4
 
-# Instalar el modelo en-core-web-sm de SpaCy
-RUN pip install en-core-web-sm==3.7.1
-
-# Descargar el modelo de SpaCy
+# Descargar el modelo en-core-web-sm de SpaCy
 RUN python -m spacy download en_core_web_sm
 
 # Establecer el comando de entrada
