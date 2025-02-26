@@ -29,7 +29,8 @@ RUN pip3 install \
     scipy \
     nltk \
     gensim \
-    spacy==3.6.1 \
+    spacy==3.6.1 \  
+    thinc==8.1.8 \ 
     annotated-types==0.6.0 \
     blis==0.7.11 \
     catalogue==2.0.10 \
@@ -66,7 +67,6 @@ RUN pip3 install \
     spacy-legacy==3.0.12 \
     spacy-loggers==1.0.5 \
     srsly==2.4.8 \
-    thinc==8.2.3 \
     threadpoolctl==3.5.0 \
     tqdm==4.66.4 \
     typer==0.9.4 \
