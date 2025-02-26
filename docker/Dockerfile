@@ -31,7 +31,7 @@ RUN pip3 install \
     gensim \
     spacy==3.6.1 \  
     thinc==8.1.8 \  
-    pydantic<2.0 \  
+    pydantic \  
     annotated-types==0.6.0 \
     blis==0.7.11 \
     catalogue==2.0.10 \
