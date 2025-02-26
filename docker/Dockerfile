@@ -21,7 +21,6 @@ RUN apt-get update && apt-get install -y apt-utils
 
 # Instalación de librerías requeridas de Python para el proyecto
 RUN pip3 install \
-    matplotlib \
     pandas \
     seaborn \
     numpy \
