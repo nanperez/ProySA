@@ -17,6 +17,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Actualiza pip a la última versión
 RUN pip3 install --upgrade pip
+RUN apt-get update && apt-get install -y apt-utils
 
 # Instalación de librerías requeridas de Python para el proyecto
 RUN pip3 install \
@@ -40,7 +41,7 @@ RUN pip3 install \
     cloudpathlib==0.16.0 \
     colorama==0.4.6 \
     confection==0.1.4 \
-    contourpy==1.2.1 \
+    contourpy==1.3.1 \
     cycler==0.12.1 \
     cymem==2.0.8 \
     fonttools==4.51.0 \
