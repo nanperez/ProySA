@@ -24,6 +24,7 @@ RUN pip3 install \
     pandas \
     seaborn \
     matplotlib \
+    scikit-learn \
     numpy \
     scipy \
     nltk \
@@ -60,7 +61,6 @@ RUN pip3 install \
     pytz==2024.1 \
     regex==2024.5.10 \
     requests==2.31.0 \
-    scikit-learn==1.4.2 \
     six==1.16.0 \
     smart-open==6.4.0 \
     spacy-legacy==3.0.12 \
