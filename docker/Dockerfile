@@ -30,7 +30,8 @@ RUN pip3 install \
     nltk \
     gensim \
     spacy==3.6.1 \  
-    thinc==8.1.8 \ 
+    thinc==8.1.8 \  
+    pydantic<2.0 \  
     annotated-types==0.6.0 \
     blis==0.7.11 \
     catalogue==2.0.10 \
@@ -55,8 +56,6 @@ RUN pip3 install \
     packaging==24.0 \
     pillow==10.3.0 \
     preshed==3.0.9 \
-    pydantic==2.7.1 \
-    pydantic_core==2.18.2 \
     pyparsing==3.1.2 \
     python-dateutil==2.9.0.post0 \
     pytz==2024.1 \
