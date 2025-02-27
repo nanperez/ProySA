@@ -131,7 +131,7 @@ def generar_combinacion_aleatoria():
     
 
 # Cargar los datos
-datos = pd.read_csv('data/Twitter2_TRAIN.csv', encoding='iso-8859-1')
+datos = pd.read_csv('../data/Twitter2_TRAIN.csv', encoding='iso-8859-1')
 print(datos)
 
 # Función para aplicar técnicas y evaluar
