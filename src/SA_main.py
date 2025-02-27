@@ -195,7 +195,7 @@ def aplicar_tecnicas_y_evaluar(combinacion, datos):
         print("Modelo de clasificación: KNN.")
 
     # Cargamos las particiones predefinidas
-    particiones = pd.read_csv('../particiones2.csv')   
+    particiones = pd.read_csv('home/ProySA/src/particiones2.csv')   
 
     # Diccionario para almacenar los resultados
     resultados = {"Pliegue": [], "Accuracy": []}
