@@ -257,7 +257,7 @@ def calcular_distancia_euclidiana(combinacion1, combinacion2):
 
 
 # Simulated annealing con visualización
-def simulated_annealing(funcion_objetivo, datos, temperatura_inicial=1000, factor_enfriamiento=0.20, temperatura_final=1e-10):
+def simulated_annealing(funcion_objetivo, datos, temperatura_inicial=1000, factor_enfriamiento=0.60, temperatura_final=1e-10):
     combinacion_inicial = generar_combinacion_aleatoria()
     combinacion_actual = combinacion_inicial
     valor_inicial = funcion_objetivo(combinacion_actual, datos)
