@@ -20,11 +20,10 @@ from sklearn.decomposition import PCA
 import matplotlib.animation as animation
 import os
 import numpy as np
-from sklearn.model_selection import StratifiedKFold
-from sklearn.metrics import f1_score, make_scorer
 
-# Parametros
-falpha = 0.6
+from sklearn.model_selection import StratifiedKFold
+
+from sklearn.metrics import f1_score, make_scorer
 
 # Cargamos el modelo de idioma español de Spacy
 nlp = spacy.load("es_core_news_sm")
@@ -93,45 +92,34 @@ def represent_text_tfidf(textos):
 
 
 # Función para generar una combinación aleatoria de técnicas respetando las tareas
-#E0
-# [a, b, c, d, e, f, g]
-#def generar_combinacion_aleatoria():
- #   combinacion = [random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1, 2, 3, 4]), random.choice([0, 1]), random.choice([0, 1, 2, 3])]
-  #  return combinacion
 
-#E1
-# [0, 0,  a, b, 1, 0, c]
-#def generar_combinacion_aleatoria():
- #   combinacion = [0, 0, random.choice([0, 1]), random.choice([0, 1]), 1, 0, random.choice([0, 1, 2, 3])]
-  #  return combinacion
-
-#E2
-# [0, 0, 1, a, b, 1, c]
-#def generar_combinacion_aleatoria():
- #   combinacion = [0, 0, 1, random.choice([0, 1]), random.choice([0, 1, 2, 3, 4]), 1, random.choice([0, 1, 2, 3])]
-  #  return combinacion
-
-#E3
-# [0, a, b, 0, 0, c, d]
-#def generar_combinacion_aleatoria():
- #   combinacion = [0, random.choice([0, 1]), random.choice([0, 1]), 0, 0, random.choice([0, 1]), random.choice([0, 1, 2, 3])]
-  #  return combinacion
-
-#E4
-# [0, 1, 1, 0, a, b, c]
-#def generar_combinacion_aleatoria():
- #   combinacion = [0, 1, 1, 0, random.choice([0, 1, 2, 3, 4]), random.choice([0, 1]), random.choice([0, 1, 2, 3])]
-  #  return combinacion
-
-#E5
-#[a, b, 1, 0, c, d, e]
-def generar_combinacion_aleatoria():
-    combinacion = [random.choice([0, 1]), random.choice([0, 1]), 1, 0, random.choice([0, 1, 2, 3, 4]), random.choice([0, 1]), random.choice([0, 1, 2, 3])]
+# SOLUCIÓN INICIAL
+def solucion_inicial():
+    combinacion = [random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1, 2, 3, 4]), random.choice([0, 1]), random.choice([0, 1, 2, 3])]
     return combinacion
+
+# Parámetro global para seleccionar la estrategia 0, 1, 2, 3, 4, 5.
+ESTRATEGIA = 0  
+
+def generar_combinacion_aleatoria():
+    if ESTRATEGIA == 0:
+        return [random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1]), random.choice([0, 1, 2, 3, 4]), random.choice([0, 1]), random.choice([0, 1, 2, 3])]
+    elif ESTRATEGIA == 1:
+        return [0, 0, random.choice([0, 1]), random.choice([0, 1]), 1, 0, random.choice([0, 1, 2, 3])]
+    elif ESTRATEGIA == 2:
+        return [0, 0, 1, random.choice([0, 1]), random.choice([0, 1, 2, 3, 4]), 1, random.choice([0, 1, 2, 3])]
+    elif ESTRATEGIA == 3:
+        return [0, random.choice([0, 1]), random.choice([0, 1]), 0, 0, random.choice([0, 1]), random.choice([0, 1, 2, 3])]
+    elif ESTRATEGIA == 4:
+        return [0, 1, 1, 0, random.choice([0, 1, 2, 3, 4]), random.choice([0, 1]), random.choice([0, 1, 2, 3])]
+    elif ESTRATEGIA == 5:
+        return [random.choice([0, 1]), random.choice([0, 1]), 1, 0, random.choice([0, 1, 2, 3, 4]), random.choice([0, 1]), random.choice([0, 1, 2, 3])]
+    else:
+        raise ValueError("Estrategia no válida. Usa un número entre 0 y 5.")
     
 
 # Cargar los datos
-datos = pd.read_csv('../data/Twitter2_TRAIN.csv', encoding='iso-8859-1')
+datos = pd.read_csv('../data/Twitter6_TRAIN.csv', encoding='iso-8859-1')
 print(datos)
 
 # Función para aplicar técnicas y evaluar
@@ -195,7 +183,7 @@ def aplicar_tecnicas_y_evaluar(combinacion, datos):
         print("Modelo de clasificación: KNN.")
 
     # Cargamos las particiones predefinidas
-    particiones = pd.read_csv('/home/ProySA/src/particiones2.csv')   
+    particiones = pd.read_csv('Particiones6.csv')   
 
     # Diccionario para almacenar los resultados
     resultados = {"Pliegue": [], "Accuracy": []}
@@ -257,8 +245,13 @@ def calcular_distancia_euclidiana(combinacion1, combinacion2):
 
 
 # Simulated annealing con visualización
-def simulated_annealing(funcion_objetivo, datos, temperatura_inicial=1000, factor_enfriamiento=falpha, temperatura_final=1e-10):
-    combinacion_inicial = generar_combinacion_aleatoria()
+# Definir factor de enfriamiento global
+#FACTOR_ENFRIAMIENTO = 0.20  # Puedes cambiar este valor cuando lo necesites
+
+def simulated_annealing(funcion_objetivo, datos, temperatura_inicial=1000, temperatura_final=1e-10):
+    global FACTOR_ENFRIAMIENTO  # Usamos la variable global
+
+    combinacion_inicial = solucion_inicial()
     combinacion_actual = combinacion_inicial
     valor_inicial = funcion_objetivo(combinacion_actual, datos)
     valor_actual = valor_inicial
@@ -326,37 +319,46 @@ def simulated_annealing(funcion_objetivo, datos, temperatura_inicial=1000, facto
         aceptados.append(aceptado)
         vecinos_historial.append((vecino1, vecino2, vecino3))
 
-        temperatura *= factor_enfriamiento
+        temperatura *= FACTOR_ENFRIAMIENTO  # Ahora usa la variable global
         valores_funcion_objetivo.append(valor_actual)
         iteracion += 1
 
     return mejor_combinacion, mejor_valor, valores_funcion_objetivo, combinacion_inicial, valor_inicial, visualizacion_iteraciones, combinaciones, aceptados, vecinos_historial, distancia_total
 
+
+
+
+
+
+ESTRATEGIA = 0  # Cambia esto para seleccionar la estrategia (0, 1, 2, 3, 4, 5)
 # Listas para acumular los resultados de todas las ejecuciones
 resultados_finales = []
 
-
+# Definir factor de enfriamiento global
+FACTOR_ENFRIAMIENTO = 0.20  # Puedes cambiar este valor
 
 for i in range(10):
     mejor_combinacion, mejor_valor, valores_funcion_objetivo, combinacion_inicial, valor_inicial, visualizacion_iteraciones, combinaciones, aceptados, vecinos_historial, distancia_total = simulated_annealing(aplicar_tecnicas_y_evaluar, datos)
     
-    # Guardar los datos de visualización en un archivo CSV
+    # Crear el nombre del archivo con el factor de enfriamiento actual
+    archivo_csv = f'visualizacion_iteraciones_F{FACTOR_ENFRIAMIENTO:.2f}_E{ESTRATEGIA}_ejecucion_{i+1}.csv'
     df_visualizacion = pd.DataFrame(visualizacion_iteraciones)
-    df_visualizacion.to_csv(f'visualizacion_iteraciones_F{falpha}_E5_ejecucion_{i+1}.csv', index=False)
+    df_visualizacion.to_csv(archivo_csv, index=False)
 
-    print(f"Los datos de visualización se han guardado en 'visualizacion_iteraciones_F{falpha}_E5_ejecucion_{i+1}.csv'.")
+    print(f"Los datos de visualización se han guardado en '{archivo_csv}'.")
 
-    
     # Graficar la evolución de la función objetivo
     plt.figure(figsize=(14, 7))
     plt.plot(valores_funcion_objetivo, label='Value of the objective function')
     plt.xlabel('Iterations')
     plt.ylabel('Fitness function value') 
-    #plt.title('Evolución de la función objetivo')
     plt.legend()
     plt.grid(True)
-    plt.savefig(f'E5_Eje{i+1}.png')  # Guardar la figura con nombre único para cada iteración
-    plt.close()  # Cerrar la figura para que no se muestre
+
+    # Guardar la figura con el nombre de la estrategia
+    archivo_png = f'E{ESTRATEGIA}_F{FACTOR_ENFRIAMIENTO:.2f}_Eje{i+1}.png'
+    plt.savefig(archivo_png)  
+    plt.close()  
 
     # Acumular resultados para imprimir al final
     resultados_finales.append(f"Iteración {i+1}:")
